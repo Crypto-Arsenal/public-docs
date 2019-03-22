@@ -17,13 +17,15 @@ class BuyOneSellOneMarket {
 
   trade(information) {
     Log("Start strategy!");
+    const exchange = Object.keys(information.candles)[0];
+    const pair = Object.keys(information.candles[exchange])[0];
 
     if (this.lastOrderType === 'sell') {
       this.lastOrderType = 'buy';
       return [
         {
-          exchange: 'Binance',
-          pair: 'ETH-USDT',
+          exchange: exchange,
+          pair: pair,
           type: 'MARKET',
           amount: 1,
           price: -1
@@ -33,8 +35,8 @@ class BuyOneSellOneMarket {
       this.lastOrderType = 'sell';
       return [
         {
-          exchange: 'Binance',
-          pair: 'ETH-USDT',
+          exchange: exchange,
+          pair: pair,
           type: 'MARKET',
           amount: -1,
           price: -1
@@ -51,13 +53,9 @@ class BuyOneSellOneMarket {
   constructor() {
     // must have for developer
     this.subscribedBooks = {
-      'Binance': {
-        pairs: [ 'ETH-USDT']
-      },
-      /*
       'Bitfinex': {
         pairs: [ 'BTC-USDT' ]
-      }*/
+      },
     };
 
     // seconds for broker to call trade()
@@ -100,8 +98,16 @@ Crypto-Arsenal支援單一Strategy同時註冊多組交易pair，因此`candle`�
   const oneOrderBook = orderBooks[exchange][pair];
 ```
 
+Single Pair 策略使用者可於使用策略時決定使用的 pair, 這時此設定會被忽略，以使用者執行策略時選擇為主，下單時請從 information 取得當前使用的 pair
+``` javascript
+  // Correct way to get exchange / pair in single pair strategy
+  const exchange = Object.keys(information.candles)[0];
+  const pair = Object.keys(information.candles[exchange])[0];
+  const candleData = information.candles[exchange][pair][0];
+```
+
 ### Candle
-Candle會以array of object的形式傳入上次呼叫到此次呼叫的K線圖資訊，共含有五項資訊`open`、`close`、`high`、`low`、`volume`，取用方式如下:
+Candle會以array of object的形式傳入上次呼叫到此次呼叫的K線圖資訊，共含有五項資訊 `open`、`close`、`high`、`low`、`volume`，取用方式如下:
 ``` javascript
   const candles = information.candles;
   const oneCandle = candles[exchange][pair][0];
@@ -229,8 +235,13 @@ class EMACross {
     if (!information.candles) return [];
     if (!information.candles[this.exchange][this.pair]) return [];
 
+    const exchange = Object.keys(information.candles)[0];
+    const pair = Object.keys(information.candles[exchange])[0];
+    const baseCurrency = pair.split('-')[1]; // pair must in format '{TARGET}-{BASE}', eg. BTC-USDT, ETH-BTC
+    const currency = pair.split('-')[0]; // pair must in format '{TARGET}-{BASE}', eg. BTC-USDT, ETH-BTC
+
     // information like
-    const candleData = information.candles[this.exchange][this.pair][0];
+    const candleData = information.candles[exchange][pair][0];
 
     // keep track history data
     this.history.push({
@@ -242,9 +253,10 @@ class EMACross {
       Volumn: candleData.volumn,
     });
 
-    let lastPrice = (information.candles[this.exchange][this.pair][0]['close']);
+    let lastPrice = (information.candles[exchange][pair][0]['close']);
     if (!lastPrice) return [];
 
+    // release old data
     if (this.history.length > this.long) {
       this.history.shift();
     } else {
@@ -266,8 +278,8 @@ class EMACross {
 
     // When up cross happend
     if (this.phase == this.PHASES.waitBuy && this.preSide == 'DOWN' && curSide == 'UP') {
-      // Not enough assets, can't buy
-      if (this.assets[this.exchange][this.baseCurrency] < lastPrice) {
+      // Not enough assets, we can't buy
+      if (this.assets[exchange][baseCurrency] < lastPrice) {
         return [];
       }
       this.preSide = curSide;
@@ -275,10 +287,10 @@ class EMACross {
       // Buy 1 coin
       return [
         {
-          exchange: this.exchange,
-          pair: this.pair,
+          exchange: exchange,
+          pair: pair,
           type: 'LIMIT',
-          amount: 1, // [CHANGE THIS] 一次買入多少 ETH
+          amount: 1, // [CHANGE THIS] 一次買入多少
           price: lastPrice
         }
       ];
@@ -289,10 +301,10 @@ class EMACross {
       // Sell all remaining coin
       return [
         {
-          exchange: this.exchange,
-          pair: this.pair,
+          exchange: exchange,
+          pair: pair,
           type: 'LIMIT',
-          amount: -this.assets[this.exchange][this.currency], // 一次賣出所有擁有的 ETH
+          amount: -this.assets[exchange][currency], // 一次賣出所有擁有的
           price: lastPrice
         }
       ];
@@ -325,10 +337,6 @@ class EMACross {
     // customizable properties
     this.long = 10; // [CHANGE THIS] 設定均線交叉的慢線週期
     this.short = 5; // [CHANGE THIS] 設定均線交叉的快線週期
-    this.exchange = 'Binance';
-    this.pair = 'ETH-USDT';
-    this.currency = 'ETH';
-    this.baseCurrency = 'USDT';
     this.PHASES = {
       init: 0,
       waitBuy: 2,
