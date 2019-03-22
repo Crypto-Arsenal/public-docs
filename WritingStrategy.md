@@ -233,12 +233,14 @@ class EMACross {
 
     // exchange may offline
     if (!information.candles) return [];
-    if (!information.candles[this.exchange][this.pair]) return [];
+
 
     const exchange = Object.keys(information.candles)[0];
     const pair = Object.keys(information.candles[exchange])[0];
     const baseCurrency = pair.split('-')[1]; // pair must in format '{TARGET}-{BASE}', eg. BTC-USDT, ETH-BTC
     const currency = pair.split('-')[0]; // pair must in format '{TARGET}-{BASE}', eg. BTC-USDT, ETH-BTC
+
+    if (!information.candles[exchange][pair]) return [];
 
     // information like
     const candleData = information.candles[exchange][pair][0];
@@ -329,7 +331,7 @@ class EMACross {
 
     // seconds for broker to call trade()
     // do not set the frequency below 60 sec.
-    this.period = 60 * 60 * 6; // [CHANGE THIS] 設定均線資料點的時間間隔，即均線週期
+    this.period = 60 * 60; // [CHANGE THIS] 設定均線資料點的時間間隔，即均線週期
     // must have
     // assets should be set by broker
     this.assets = undefined;
