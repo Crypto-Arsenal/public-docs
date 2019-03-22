@@ -1,4 +1,4 @@
-Writing Strategy
+Writing Strategy in JS
 ---
 
 # 基本結構
@@ -219,6 +219,9 @@ Log(str);
 ```
 Must pass in javascript's `string` type.
 Maximum length of string is 200 characters
+
+# 存取策略參數
+使用 ```this.xxx``` 或是 ```this['OPTION_NAME']``` 存取策略參數
 
 # 更多範例
 
