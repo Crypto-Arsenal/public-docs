@@ -74,16 +74,15 @@ class BuyOneSellOneMarket {
 }
 
 ```
-### Data Structure of `trade()`
-When strategy is called, `information` as a parameter is carried in `trade()`, containing two categories of objects, `candle` and `orderBooks`.
-You are able to access them as below,
+### Carried-in Data in `trade()`
+When a strategy is called, `information` as a parameter is carried in `trade()`, containing two categories of objects, `candle` and `orderBooks`. The following code snippet shows you how to retrieve candle and orderBooks info,
 
 ``` javascript
   const candle = information.candle;
   const orderBooks = information.orderBooks;
 ```
 
-Crypto-Arsenal supports multi-pair tradings, `candle` and `orderBooks` are able to carry in multi-pair info. The following code snippet shows you how to acquaire one specific candle or orderbook info of a trading pair in an exchange.
+Crypto-Arsenal supports multi-pair tradings, `candle` and `orderBooks` may carry-in data for multiple pairs. The following code snippet shows you how to acquaire one specific candle and orderbook info of multiple pairs in an exchange.
 Please note that `exchange` and `pair` are registered by developers through `this.subscribedBooks` in `strategy constructor`.
 
 ``` javascript
@@ -103,8 +102,9 @@ If a strategy is used in single-pair trading, the single trading pair and exchan
   const candleData = information.candles[exchange][pair][0];
 ```
 
-### Candle
-Candle會以array of object的形式傳入上次呼叫到此次呼叫的K線圖資訊，共含有五項資訊 `open`、`close`、`high`、`low`、`volume`，取用方式如下:
+### Candle Info
+Candle is an array containing objects, which represent five different info, `open`, `close`, `high`, `low` and `volume` with respect to a trading pair under an exchange. The following code snippet shows you how to acquire these info.
+
 ``` javascript
   const candles = information.candles;
   const oneCandle = candles[exchange][pair][0];
@@ -116,9 +116,10 @@ Candle會以array of object的形式傳入上次呼叫到此次呼叫的K線圖�
   const volume = oneCandle.volume;
 ```
 
-### Order Books
+### OrderBooks Info
 Order Books會以object of array of object的形式傳入，將傳入目前交易所中此pair的訂單資訊，分成兩大項`asks`與`bids`，兩項中皆有相同的三項資料格式`price`、`count`、`amount`，取用方式如下:
 **在執行Backtest模式中，不會傳入Order books資訊**
+OrderBooks is an object containing 
 ``` javascript
   const orderBooks = information.orderBooks;
   const oneOrderBook = orderBooks[exchange][pair];
