@@ -8,7 +8,7 @@
 * You can record your trading data with `Log(str)`.
 
 ## Create Your Strategy
-### Class Structure
+### Basic Coding Structure
 ``` javascript
 class BuyOneSellOneMarket {
 
@@ -74,19 +74,18 @@ class BuyOneSellOneMarket {
 }
 
 ```
-
-## 傳入資料結構 ( trade() )
-系統呼叫strategy時，共會傳入一個參數並放次於第一個參數，此參數後續以`information`命名解釋．
-傳入的資訊分為兩大項，其一為`candle`(`K線圖資訊`)，另一項為`orderBooks`(`訂單狀態`)．
-上述兩項資訊將放置於一個object中，取用方法為:
+### Data Structure of `trade()`
+When strategy is called, `information` as a parameter is carried in `trade()`, containing two categories of objects, `candle` and `orderBooks`.
+You are able to access them as below,
 
 ``` javascript
   const candle = information.candle;
   const orderBooks = information.orderBooks;
 ```
 
-Crypto-Arsenal支援單一Strategy同時註冊多組交易pair，因此`candle`與`orderBooks`會同時傳入多組pair的資訊，如需取用請以下列方式取用，
-其中`exchange`與`pair`為在strategy constructor中的`this.subscribedBooks`向系統註冊的pair
+Crypto-Arsenal supports multi-pair tradings, `candle` and `orderBooks` are able to carry in multi-pair info. The following code snippet shows you how to acquaire one specific candle or orderbook info of a trading pair in an exchange.
+Please note that `exchange` and `pair` are registered by developers through `this.subscribedBooks` in `strategy constructor`.
+
 ``` javascript
   const candle = information.candle;
   const oneCandle = candle[exchange][pair];
@@ -95,7 +94,8 @@ Crypto-Arsenal支援單一Strategy同時註冊多組交易pair，因此`candle`�
   const oneOrderBook = orderBooks[exchange][pair];
 ```
 
-Single Pair 策略使用者可於使用策略時決定使用的 pair, 這時此設定會被忽略，以使用者執行策略時選擇為主，下單時請從 information 取得當前使用的 pair
+If a strategy is used in single-pair trading, the single trading pair and exchange can be assigned on the fly. The following code snippet shows you how to get current `exchange` and `pair` info.
+
 ``` javascript
   // Correct way to get exchange / pair in single pair strategy
   const exchange = Object.keys(information.candles)[0];
