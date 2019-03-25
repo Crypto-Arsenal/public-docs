@@ -6,8 +6,8 @@ Developing Your Strategies with Python
 # Fundamental
 Here are hints for you to qucikly develop your trading strategies:
 * Get started to develop your strategy class with Python 3 syntax.
-* There are dedicated interfaces to be coded along, please refer to 'Basic Coding Structure' as below; note that your strategy takes in current market trading data and must return result whether your trades are executed or not.
-* The Life cycle of your trades/orders are maintained by your own strategy.
+* There are dedicated interfaces to be coded along, please refer to 'Basic Coding Structure' as below; note that your strategy takes in current market trading data and must return results whether your trades are executed or not.
+* The life cycle of your trades/orders are maintained by your own strategy.
 * You can leverage off-the-shelf technical analysis indicators of [TA-LIB](https://github.com/acrazing/talib-binding-node) for quickly develop your strategies.
 * You can record your trading data with `Log(str)`.
 
