@@ -1,6 +1,4 @@
 # Developing Your Strategies with Python
----
-
 ## [Basic Infomation](WritingStrategy_en.md)
 ## What You Need to Know...
 Here are hints for you to qucikly develop your trading strategies:
