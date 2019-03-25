@@ -2,7 +2,7 @@
 ## [Basic Infomation](WritingStrategy_en.md)
 ## What You Need To Know...
 Here are hints for you to qucikly develop your trading strategies:
-* Get started to develop your strategy class with Python 3 syntax.
+* Get started to develop your Strategy Class in compliance with Python 3.
 * There are dedicated interfaces to be coded along, please refer to 'Basic Coding Structure' as below; note that your strategy takes in current market trading data and must return results whether your trades are executed or not.
 * The life cycle of your trades/orders are maintained by your own strategy.
 * You can leverage off-the-shelf technical analysis indicators of [TA-LIB](https://github.com/acrazing/talib-binding-node) for quickly develop your strategies.
