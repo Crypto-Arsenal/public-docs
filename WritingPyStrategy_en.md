@@ -1,8 +1,8 @@
-Developing Your Strategies with Python
+# Developing Your Strategies with Python
 ---
 
-# [Basic Infomation](WritingStrategy_en.md)
-# What You Need to Know...
+## [Basic Infomation](WritingStrategy_en.md)
+## What You Need to Know...
 Here are hints for you to qucikly develop your trading strategies:
 * Get started to develop your strategy class with Python 3 syntax.
 * There are dedicated interfaces to be coded along, please refer to 'Basic Coding Structure' as below; note that your strategy takes in current market trading data and must return results whether your trades are executed or not.
@@ -10,8 +10,8 @@ Here are hints for you to qucikly develop your trading strategies:
 * You can leverage off-the-shelf technical analysis indicators of [TA-LIB](https://github.com/acrazing/talib-binding-node) for quickly develop your strategies.
 * You can record your trading data with `Log(str)`.
 
-# Create Your Strategy
-## Basic Coding Structure
+## Create Your Strategy
+### Basic Coding Structure
 ``` python
 class Strategy():
     # option setting needed
@@ -69,7 +69,7 @@ class Strategy():
 
 * `information` above, returns the basic trading structure, `__init__` returns all necessary parameters, for more details please refer to [Nodejs](WritingStrategy.md).
 
-## Advanced
+### Advanced
 * You can access to [numpy](http://www.numpy.org/) by using np.
 * You can access to [talib](https://github.com/mrjbq7/ta-lib) by using talib.
 * You can access to strategy parameters via ```self['OPTION_NAME']```.
