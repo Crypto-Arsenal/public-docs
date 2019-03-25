@@ -1,6 +1,6 @@
 # Developing Your Strategies with Python
 ## [Basic Infomation](WritingStrategy_en.md)
-## What You Need to Know...
+## What You Need To Know...
 Here are hints for you to qucikly develop your trading strategies:
 * Get started to develop your strategy class with Python 3 syntax.
 * There are dedicated interfaces to be coded along, please refer to 'Basic Coding Structure' as below; note that your strategy takes in current market trading data and must return results whether your trades are executed or not.
