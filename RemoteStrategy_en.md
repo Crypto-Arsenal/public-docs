@@ -3,4 +3,4 @@ As a strategy developer, you may want to develop and run your strategies on the 
 
 1. Click on `Photo` icon, then press `Manage` button under `Profile` tag and follow instructions to create an API Token.
 2. Go to `My Arsenal`, then `My Strategy`, click on `New Strategy` button, fillup necessary info, select `Local Side` and press `Save` button.
-3. Download SDK and follow instructions in 'Readme.md' for remote strategy development.
+3. Download SDK and follow instructions in `Readme.md` for remote strategy development.
