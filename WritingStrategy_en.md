@@ -352,7 +352,6 @@ class EMACross {
 ```
 
 ## Parameters You Can Adjust
-
 ![](https://i.imgur.com/y82aDps.jpg)
 
 ![](https://i.imgur.com/VGIhd4z.png)
