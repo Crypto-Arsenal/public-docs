@@ -177,8 +177,7 @@ All strategies in Crypto-Arsenal, the return value from `trade()` contains 0 to 
 * amount: The amount of crypto for trading. '>= 0' means 'buy' (order taker). '< 0' means 'sell' (order maker).
 * price: The price you wish for trading. If 'type' is assigned to `MARKET`, then price can be any value.
 
-### Example
-#### LIMIT
+### LIMIT
 In the following code snippet, it shows that this order is made to 'Binance' with assigned price of 212.42 USDT to purpose 1 ETH.
 
 ``` javascript
@@ -193,7 +192,7 @@ In the following code snippet, it shows that this order is made to 'Binance' wit
 ]
 ```
 
-#### MARKET
+### MARKET
 In the following code snippet, it shows that this order is made to 'Binance' with current market price (USDT) to purpose 1 ETH.
 **Note: It is mandatory that price shalle be assigned to any value, even the type of trading is based on market price!**
 
@@ -219,9 +218,8 @@ Used to log the message. 'str' must be javescript string tyep and maximum length
 ### Access to Parameter of a Strategy
 Use ```this.xxx``` or ```this['OPTION_NAME']``` to access parameter of a strategy.
 
-### 更多範例
-此策略使用[TA-LIB](https://github.com/acrazing/talib-binding-node)計算兩條指數平均線(快線與慢線)，並當發生黃金交叉(快線往上穿過慢線)時買入，死亡交叉(快線往下穿破慢線)時賣出。
-The following example is a MA Cross Strategy, which uses [TA-LIB](https://github.com/acrazing/talib-binding-node) to calculate two moving averages, short and long. When 
+## Example
+The following example is a MA Cross Strategy, which uses [TA-LIB](https://github.com/acrazing/talib-binding-node) to calculate two moving averages, short and long lines. When a signal ('short' breaks through 'long' line) appears, then it shows a 'buying point'; otherwise, 'selling point'.
 
 ``` javascript
 class EMACross {
