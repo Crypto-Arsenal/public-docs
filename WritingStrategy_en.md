@@ -75,14 +75,14 @@ class BuyOneSellOneMarket {
 
 ```
 ### Carried-in Data in `trade()`
-When a strategy is called, `information` as a parameter is carried in `trade()`, containing two categories of objects, `candle` and `orderBooks`. The following code snippet shows you how to retrieve candle and orderBooks info,
+When a strategy is called, `information` as a parameter is carried into `trade()`, containing two categories of objects, `candle` and `orderBooks`. The following code snippet shows you how to retrieve `candle` and `orderBooks` info,
 
 ``` javascript
   const candle = information.candle;
   const orderBooks = information.orderBooks;
 ```
 
-Crypto-Arsenal supports multi-pair tradings, `candle` and `orderBooks` may carry-in data for multiple pairs. The following code snippet shows you how to acquaire one specific candle and orderbook info of multiple pairs in an exchange.
+Crypto-Arsenal supports multi-pair trading, `candle` and `orderBooks` could carry-in data for multiple pairs. The following code snippet shows you how to acquaire one specific candle and orderbook info among multiple pairs in an exchange.
 Please note that `exchange` and `pair` are registered by developers through `this.subscribedBooks` in `strategy constructor`.
 
 ``` javascript
@@ -93,7 +93,7 @@ Please note that `exchange` and `pair` are registered by developers through `thi
   const oneOrderBook = orderBooks[exchange][pair];
 ```
 
-If a strategy is used in single-pair trading, the single trading pair and exchange can be assigned on the fly. The following code snippet shows you how to get current `exchange` and `pair` info.
+If a strategy is used for single-pair trading, the single trading pair and exchange can be assigned on the fly. The following code snippet shows you how to get current `exchange` and `pair` info.
 
 ``` javascript
   // Correct way to get exchange / pair in single pair strategy
@@ -103,7 +103,7 @@ If a strategy is used in single-pair trading, the single trading pair and exchan
 ```
 
 ### Candle Info
-Candle is an array containing objects, which represent five different info, `open`, `close`, `high`, `low` and `volume` with respect to a trading pair under an exchange. The following code snippet shows you how to acquire these info.
+Each `candle` contains five different info, `open`, `close`, `high`, `low` and `volume` with respect to a trading pair under an exchange. The following code snippet shows you how to acquire these info.
 
 ``` javascript
   const candles = information.candles;
@@ -117,9 +117,8 @@ Candle is an array containing objects, which represent five different info, `ope
 ```
 
 ### OrderBooks Info
-Order Books會以object of array of object的形式傳入，將傳入目前交易所中此pair的訂單資訊，分成兩大項`asks`與`bids`，兩項中皆有相同的三項資料格式`price`、`count`、`amount`，取用方式如下:
-**在執行Backtest模式中，不會傳入Order books資訊**
-OrderBooks is an object containing 
+Each `orderBook` contains two different info, `asks` and `bids`, with respect to a trading pair under an exchange. Each of `asks` or `bids` contains three different info, `price`, `count` and `amount`. The following code snippet shows you how to acquire these info. **Please note that there shows NO `orderBooks` info under Backtesting Mode.**
+
 ``` javascript
   const orderBooks = information.orderBooks;
   const oneOrderBook = orderBooks[exchange][pair];
@@ -140,15 +139,18 @@ OrderBooks is an object containing
 ```
 
 ### Assets
-策略會擁有隨時更新的資產 (assets) 資訊，即當前可進行操作的貨幣，取用方式如下:
+The following code snippet shows you how to get your up-to-date assets in an exchange.
+
 ```javascript
   const usd = this.assets[exchange]['USDT'];
   const eth = this.assets[exchange]['ETH'];
 ```
 
-## 回傳值 (trade)
+### Return Value from `trade()`
 在Crypto-Arsenal的策略中，要向交易所下訂單的方式採用系統呼叫`trade`的回傳值進行交易。
-### 基本格式
+All strategies in Crypto-Arsenal, the return value from `trade()` contains 0 to N objects in an array, shown as below code snippet. You make orders to an exchange by this return value.
+
+### Format of Return Value of `trade()`
 ``` javascript
 [
   {
@@ -167,19 +169,17 @@ OrderBooks is an object containing
   } ....
 ]
 ```
-回傳值為一個含有0-n個object的array，
 
-### 欄位說明
+### Detail for Each Info
+* exchange: The exchage you would like to put orders to.
+* pair: Your assigned trading pair.
+* type: The type of trading, `LIMIT`: order is made by assigned price; `MARKET`: order is made by market price.
+* amount: The amount of crypto for trading. '>= 0' means 'buy' (order taker). '< 0' means 'sell' (order maker).
+* price: The price you wish for trading. If 'type' is assigned to `MARKET`, then price can be any value.
 
-* exchange: 此筆訂單要向哪個交易所進行交易
-* pair: 交易pair為何
-* type: 此筆訂單採用何種交易方式 (限價: `LIMIT` 市價: `MARKET`)
-* amount: 要交易的數位貨幣數量，大於0代表購買，小於0代表販賣
-* price: 以多少價格進行交易，若採用市價，此欄位請填入隨意值
-
-### 範例
-#### 限價
-此訂單為欲向`Binance`交易所，以每單位`214.42`購買`1`個`ETH-USDT`的交易配對
+### Example
+#### LIMIT
+In the following code snippet, it shows that this order is made to 'Binance' with assigned price of 212.42 USDT to purpose 1 ETH.
 
 ``` javascript
 [
@@ -193,10 +193,10 @@ OrderBooks is an object containing
 ]
 ```
 
-#### 市價
-此訂單為欲向`Binance`交易所，以`市價`購買`1`個`ETH-USDT`的交易配對
+#### MARKET
+In the following code snippet, it shows that this order is made to 'Binance' with current market price (USDT) to purpose 1 ETH.
+**Note: It is mandatory that price shalle be assigned to any value, even the type of trading is based on market price!**
 
-**雖然交易採用市價，price仍須存在，值為隨意數值**
 ``` javascript
 [
   {
@@ -209,21 +209,20 @@ OrderBooks is an object containing
 ]
 ```
 
-# Helper Functions
-## Log
-Used to log the message.
+### Log
+Used to log the message. 'str' must be javescript string tyep and maximum length of 'str' is 200 characters.
+
 ``` javascript
-Log(str);
+  Log(str);
 ```
-Must pass in javascript's `string` type.
-Maximum length of string is 200 characters
 
-# 存取策略參數
-使用 ```this.xxx``` 或是 ```this['OPTION_NAME']``` 存取策略參數
+### Access to Parameter of a Strategy
+Use ```this.xxx``` or ```this['OPTION_NAME']``` to access parameter of a strategy.
 
-# 更多範例
-
+### 更多範例
 此策略使用[TA-LIB](https://github.com/acrazing/talib-binding-node)計算兩條指數平均線(快線與慢線)，並當發生黃金交叉(快線往上穿過慢線)時買入，死亡交叉(快線往下穿破慢線)時賣出。
+The following example is a MA Cross Strategy, which uses [TA-LIB](https://github.com/acrazing/talib-binding-node) to calculate two moving averages, short and long. When 
+
 ``` javascript
 class EMACross {
   // must have
