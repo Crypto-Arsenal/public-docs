@@ -147,7 +147,6 @@ The following code snippet shows you how to get your up-to-date assets in an exc
 ```
 
 ### Return Value from `trade()`
-在Crypto-Arsenal的策略中，要向交易所下訂單的方式採用系統呼叫`trade`的回傳值進行交易。
 All strategies in Crypto-Arsenal, the return value from `trade()` contains 0 to N objects in an array, shown as below code snippet. You make orders to an exchange by this return value.
 
 ### Format of Return Value of `trade()`
@@ -352,7 +351,7 @@ class EMACross {
 }
 ```
 
-* 調整參數
+## Parameters You Can Adjust
 
 ![](https://i.imgur.com/y82aDps.jpg)
 
