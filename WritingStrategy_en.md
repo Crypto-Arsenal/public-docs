@@ -208,7 +208,7 @@ In the following code snippet, it shows that this order is made to 'Binance' wit
 ```
 
 ### Log
-Used to log the message. 'str' must be javescript string tyep and maximum length of 'str' is 200 characters.
+Used to log the message. 'str' must be javescript string type and maximum length of 'str' is 200 characters.
 
 ``` javascript
   Log(str);
@@ -289,7 +289,7 @@ class EMACross {
           exchange: exchange,
           pair: pair,
           type: 'LIMIT',
-          amount: 1, // [CHANGE THIS] 一次買入多少
+          amount: 1, // [CHANGE THIS] Buying Amount
           price: lastPrice
         }
       ];
@@ -303,7 +303,7 @@ class EMACross {
           exchange: exchange,
           pair: pair,
           type: 'LIMIT',
-          amount: -this.assets[exchange][currency], // 一次賣出所有擁有的
+          amount: -this.assets[exchange][currency], // All Out
           price: lastPrice
         }
       ];
@@ -328,14 +328,14 @@ class EMACross {
 
     // seconds for broker to call trade()
     // do not set the frequency below 60 sec.
-    this.period = 60 * 60; // [CHANGE THIS] 設定均線資料點的時間間隔，即均線週期
+    this.period = 60 * 60; // [CHANGE THIS] Set time period for MA lines
     // must have
     // assets should be set by broker
     this.assets = undefined;
 
     // customizable properties
-    this.long = 10; // [CHANGE THIS] 設定均線交叉的慢線週期
-    this.short = 5; // [CHANGE THIS] 設定均線交叉的快線週期
+    this.long = 10; // [CHANGE THIS] Set MA Cross period for long line
+    this.short = 5; // [CHANGE THIS] Set MA Cross period for short line
     this.PHASES = {
       init: 0,
       waitBuy: 2,
@@ -350,8 +350,3 @@ class EMACross {
   }
 }
 ```
-
-## Parameters You Can Adjust
-![](https://i.imgur.com/y82aDps.jpg)
-
-![](https://i.imgur.com/VGIhd4z.png)
