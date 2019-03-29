@@ -72,7 +72,6 @@ class BuyOneSellOneMarket {
     this.lastOrderType = 'sell';
   }
 }
-
 ```
 ### Carried-in Data in `trade()`
 When a strategy is called, `information` as a parameter is carried into `trade()`, containing two categories of objects, `candle` and `orderBooks`. The following code snippet shows you how to retrieve `candle` and `orderBooks` info,
@@ -131,11 +130,11 @@ Each `orderBook` contains two different info, `asks` and `bids`, with respect to
   }
 
   const bidOrderBook = oneOrderBook.bids;
-    for (const bidOrder of bidOrderBook) {
-      const price = bidOrder.price;
-      const count = bidOrder.count;
-      const amount = bidOrder.amount;
-    }
+  for (const bidOrder of bidOrderBook) {
+    const price = bidOrder.price;
+    const count = bidOrder.count;
+    const amount = bidOrder.amount;
+  }
 ```
 
 ### Assets
@@ -180,15 +179,15 @@ All strategies in Crypto-Arsenal, the return value from `trade()` contains 0 to 
 In the following code snippet, it shows that this order is made to 'Binance' with assigned price of 212.42 USDT to purpose 1 ETH.
 
 ``` javascript
-[
-  {
-    exchange: 'Binance',
-    pair: 'ETH-USDT',
-    type: 'LIMIT',
-    amount: 1,
-    price: 212.42
-  }
-]
+  [
+    {
+      exchange: 'Binance',
+      pair: 'ETH-USDT',
+      type: 'LIMIT',
+      amount: 1,
+      price: 212.42
+    }
+  ]
 ```
 
 ### MARKET
@@ -196,15 +195,15 @@ In the following code snippet, it shows that this order is made to 'Binance' wit
 **Note: It is mandatory that price shalle be assigned to any value, even the type of trading is based on market price!**
 
 ``` javascript
-[
-  {
-    exchange: 'Binance',
-    pair: 'ETH-USDT',
-    type: 'MARKET',
-    amount: 1,
-    price: -1
-  }
-]
+  [
+    {
+      exchange: 'Binance',
+      pair: 'ETH-USDT',
+      type: 'MARKET',
+      amount: 1,
+      price: -1
+    }
+  ]
 ```
 
 ### Log
@@ -230,7 +229,6 @@ class EMACross {
 
     // exchange may offline
     if (!information.candles) return [];
-
 
     const exchange = Object.keys(information.candles)[0];
     const pair = Object.keys(information.candles[exchange])[0];
