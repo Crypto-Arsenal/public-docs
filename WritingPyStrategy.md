@@ -16,6 +16,7 @@ Writing Strategy in Py
 
 
 ``` python
+# Class name must be Strategy
 class Strategy():
     # option setting needed
     def __setitem__(self, key, value):
@@ -81,6 +82,7 @@ class Strategy():
 
 ### 黃金交叉策略範例
 ``` python
+# Class name must be Strategy
 class Strategy():
     # option setting needed
     def __setitem__(self, key, value):
