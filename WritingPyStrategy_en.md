@@ -11,6 +11,7 @@ Here are hints for you to qucikly develop your trading strategies:
 ## Create Your Strategy
 ### Basic Coding Structure
 ``` python
+# Class name must be Strategy
 class Strategy():
     # option setting needed
     def __setitem__(self, key, value):
@@ -74,6 +75,7 @@ class Strategy():
 
 ### A Simple Example: MA Cross Strategy
 ``` python
+# Class name must be Strategy
 class Strategy():
     # option setting needed
     def __setitem__(self, key, value):
