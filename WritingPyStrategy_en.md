@@ -1,7 +1,7 @@
 # Developing Your Strategies with Python
 ## [Basic Infomation](WritingStrategy_en.md)
 ## What You Need To Know...
-Here are hints for you to qucikly develop your trading strategies:
+Here are hints for you to quickly develop your trading strategies:
 * Get started to develop your Strategy Class in compliance with Python 3.
 * There are dedicated interfaces to be coded along, please refer to 'Basic Coding Structure' as below; note that your strategy takes in current market trading data and must return results whether your trades are executed or not.
 * The life cycle of your trades/orders are maintained by your own strategy.
@@ -175,7 +175,7 @@ When using Python to develop you trading strategies, you can choose to upload yo
 Make sure using python3.6 to compile
 1. Compile your source codes with ```python3 -m py_compile strategy.py```.
 2. Find ```strategy.cpython-36.pyc``` in ```./__pycache__```
-3. Go to My Strategy, under `Edit Strategy` tag, check `Use Binary Code` to upload your binary codes (.pyc).
+3. Go to My Strategy, under `Edit Strategy` tab, check `Use Binary Code` to upload your binary codes (.pyc).
 
 
 
