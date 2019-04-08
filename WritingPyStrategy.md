@@ -1,8 +1,6 @@
 Writing Strategy in Py
 ---
 
-# [Basic Infomation](WritingStrategy.md)
-
 # 基本結構
 * 使用 python 3 撰寫 Strategy Class
 * 系統透過固定介面呼叫，傳入市場資料，策略須回傳是否執行訂單
