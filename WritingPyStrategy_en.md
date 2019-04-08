@@ -172,6 +172,7 @@ class Strategy():
 ## Upload .pyc to the Cloud
 When using Python to develop you trading strategies, you can choose to upload your binary codes (.pyc) to our platform if you want to keep your source codes in private.
 Make sure using python3.6 to compile
+
 1. Compile your source codes with ```python3 -m py_compile strategy.py```.
 2. Find ```strategy.cpython-36.pyc``` in ```./__pycache__```
 3. Go to My Strategy, under `Edit Strategy` tab, check `Use Binary Code` to upload your binary codes (.pyc).
