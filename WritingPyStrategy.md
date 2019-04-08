@@ -177,9 +177,11 @@ class Strategy():
 ```
 
 ## Binary Code
-使用 python 開發時，可以選擇上傳 binay code 保護原始碼
-請確認 python3 版本為 
-1. 請先以 ```python3 -m py_compile strategy.py``` 將原始碼編譯。
-2. 至 ```./__pycache__ ``` 中找到 ```strategy.cpython-36.pyc``` ，於 Edit Strategy 頁面選擇 Binay Code 後上傳。
+使用 python 開發時，可以選擇上傳 binary code 保護原始碼
+請務必使用 python 3.6 版本進行編譯
+
+1. 請先以 ```python3 -m py_compile strategy.py``` 將原始碼編譯
+2. 至 ```./__pycache__ ``` 中找到 ```strategy.cpython-36.pyc``` 
+3. 到 My Strategy 的 Edit Strategy 頁面選擇 Use Binary Code 後上傳。
 
 
