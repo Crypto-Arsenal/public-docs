@@ -1,5 +1,4 @@
 # Developing Your Strategies with Python
-## [Basic Infomation](WritingStrategy_en.md)
 ## What You Need To Know...
 Here are hints for you to quickly develop your trading strategies:
 * Get started to develop your Strategy Class in compliance with Python 3.
