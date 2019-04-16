@@ -53,7 +53,7 @@ Suppose you use the following configuration
 
 **Note: Only ASCII string is supported currently.**
 
-Then you're allowed to tweak these variables to be used in your strategy before trading. `MyArgD` will appear as a list consisting of `OptionA`, `OptionB` and `OptionC.
+Then you're allowed to tweak these variables to be used in your strategy before trading. `MyArgD` will appear as a list consisting of `OptionA`, `OptionB` and `OptionC`.
 
 ![image](https://user-images.githubusercontent.com/5862369/56237500-b3511900-60be-11e9-878d-3e5c2cff4991.png)
 
