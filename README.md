@@ -42,6 +42,8 @@ All arguments are actually stored and parsed as `String` type in your strategy c
 
 ## Example
 
+Suppose you use the following configuration
+
 | Variable | Description  | Type    | Default Value             |
 | -------- | ------------ | ------- | ------------------------- |
 | MyArgA   | true/false   | Boolean | true                      |
@@ -50,6 +52,11 @@ All arguments are actually stored and parsed as `String` type in your strategy c
 | MyArgD   | a ASCII list | Select  | OptionA\|OptionB\|OptionC |
 
 **Note: Only ASCII string is supported currently.**
+
+Then you're allowed to tweak these variables to be used in your strategy before trading. `MyArgD` will appear as a list consisting of `OptionA`, `OptionB` and `OptionC.
+
+![image](https://user-images.githubusercontent.com/5862369/56237500-b3511900-60be-11e9-878d-3e5c2cff4991.png)
+
 
 ### JavaScript Example
 
