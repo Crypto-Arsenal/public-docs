@@ -1,4 +1,4 @@
-# Developing Your Strategies with Python
+# Developing My Strategy in Python
 ## What You Need To Know...
 Here are hints for you to quickly develop your trading strategies:
 * Get started to develop your Strategy Class in compliance with Python 3.
@@ -7,7 +7,7 @@ Here are hints for you to quickly develop your trading strategies:
 * You can leverage off-the-shelf technical analysis indicators of [TA-LIB](https://github.com/acrazing/talib-binding-node) for quickly develop your strategies.
 * You can record your trading data with `Log(str)`.
 
-## Create Your Strategy
+## Create My Cloud Strategy
 ### Basic Coding Structure
 ``` python
 # Class name must be Strategy

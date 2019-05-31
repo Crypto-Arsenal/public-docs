@@ -1,4 +1,4 @@
-Writing Strategy in Py
+Developing My Strategy in Python
 ---
 
 # 基本結構

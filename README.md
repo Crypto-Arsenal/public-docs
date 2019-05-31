@@ -4,15 +4,15 @@ This repository contains document files for [https://www.crypto-arsenal.io/](htt
 
 | File Name  | Description | Language |
 | ---------- | ----------- | -------- |
-| [WritingStrategy.md](WritingStrategy.md) | Develop My Strategy with JS | 中文 |
-| [WritingStrategy_en.md](WritingStrategy_en.md) | Develop My Strategy with JS | English |
-| [WritingPyStrategy.md](WritingPyStrategy.md) | Develop My Strategy with Python | 中文 |
-| [WritingPyStrategy_en.md](WritingPyStrategy_en.md) | Develop My Strategy with Python | English |
-| [RemoteStrategy.md](RemoteStrategy.md) | Develop My Remote Strategy | 中文 |
-| [RemoteStrategy_en.md](RemoteStrategy_en.md) | Develop My Remote Strategy | English |
+| [WritingStrategy.md](WritingStrategy.md) | 使用 JavaScript 開發策略 | 中文 |
+| [WritingStrategy_en.md](WritingStrategy_en.md) | Develop My Strategy in JS | English |
+| [WritingPyStrategy.md](WritingPyStrategy.md) | 使用 Python 開發策略 | 中文 |
+| [WritingPyStrategy_en.md](WritingPyStrategy_en.md) | Develop My Strategy in Python | English |
+| [LocalStrategy.md](LocalStrategy.md) | 本地策略 | 中文 |
+| [LocalStrategy_en.md](LocalStrategy_en.md) | Local Strategy | English |
 
 
-# Strategy Argument Configuration
+# Strategy Options Configuration
 
 You can add some extra arguments for the strategy and change these arguments for every live trade, backtest or simulation.
 For example, if you have the following configuration for a strategy

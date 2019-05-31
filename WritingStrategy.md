@@ -1,4 +1,4 @@
-Writing Strategy in JS
+Developing My Strategy in JavaScript
 ---
 
 # 基本結構

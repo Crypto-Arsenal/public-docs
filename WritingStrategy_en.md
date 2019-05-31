@@ -1,4 +1,4 @@
-# Developing Your Strategy with JS
+# Developing My Strategy in JavaScript
 
 ## What You Need To Know...
 * Get started to develop your Strategy Class by using Nodejs in compliance with ES6.
@@ -7,7 +7,7 @@
 * You can leverage off-the-shelf technical analysis indicators of [TA-LIB](https://github.com/acrazing/talib-binding-node) for quickly develop your strategies.
 * You can record your trading data with `Log(str)`.
 
-## Create Your Strategy
+## Create My Cloud Strategy
 ### Basic Coding Structure
 ``` javascript
 class BuyOneSellOneMarket {
