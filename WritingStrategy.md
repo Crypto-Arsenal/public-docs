@@ -7,6 +7,7 @@ Developing My Strategy in JavaScript
 * 策略須自行維護訂單生命週期
 * 可以使用 [TA-LIB](https://github.com/acrazing/talib-binding-node) 計算常見技術指標，使用 TA 存取
 * 可以使用 Log(str) 紀錄運行資訊
+* 可以使用 GetLastOrderSnapshot() 取得最後成交訂單資訊
 
 # 策略
 
@@ -219,6 +220,13 @@ Log(str);
 ```
 Must pass in javascript's `string` type.
 Maximum length of string is 200 characters
+
+## GetLastOrderSnapshot
+回傳最後一次成交訂單，包含市價單成交價格
+結構如下
+```
+{'exchange': 'Bitfinex', 'pair': 'ETH-USDT', 'amount': 1.0, 'price': 182.39, 'type': 'MARKET'}
+```
 
 # 存取策略參數
 使用 ```this.xxx``` 或是 ```this['OPTION_NAME']``` 存取策略參數
