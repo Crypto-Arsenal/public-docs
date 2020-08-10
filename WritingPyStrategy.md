@@ -31,9 +31,13 @@ class Strategy():
                 'pairs': ['ETH-USDT'],
             },
         }
-        self.period = 10 * 60
+
+        // seconds for broker to call trade()
+        // do not set the frequency below 60 sec.
+        // 60 * 30 for 30 mins        self.period = 10 * 60
         self.options = {}
 
+        // other properties, your code
         # user defined class attribute
         self.last_type = 'sell'
 
@@ -70,6 +74,16 @@ class Strategy():
 ```
 
 * information, 回傳所需結構, `__init__` 所需參數, 欄位請參考 [Nodejs](WritingStrategy.md)
+
+
+### Assets
+策略會擁有隨時更新的資產 (assets) 資訊，即當前可進行操作的貨幣，取用方式如下:
+```python
+  usdt_amount = self['assets'][exchange]['USDT'] 
+  btc_amount = self['assets'][exchange]['BTC'] 
+```
+
+
 
 
 ## 進階用法
