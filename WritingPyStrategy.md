@@ -181,12 +181,9 @@ def trade(self, information):
 可使用 np 存取 [numpy](http://www.numpy.org/)
 可使用 talib 存取 [talib](https://github.com/mrjbq7/ta-lib)
 ### 範例
-使用np.append
+使用np.append，使用talib計算RSI
 ``` python
 self.close_price_trace = np.append(self.close_price_trace, [float( information['candles'][exchange][pair][0]['close'])])
-        ```
-使用talib計算RSI
-``` python
 rsi = talib.RSI(self.close_price_trace, Len)[-1]
 ```
 
