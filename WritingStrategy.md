@@ -170,12 +170,12 @@ Order Books會以object of array of object的形式傳入，將傳入目前交�
   } ....
 ]
 ```
-回傳值為一個含有0-n個object的array，
+回傳值為一個含有0-n個object的array。
 
 ### 欄位說明
 
 * exchange: 此筆訂單要向哪個交易所進行交易
-* pair: 交易pair為何
+* pair: 交易貨幣對
 * type: 此筆訂單採用何種交易方式 (限價: `LIMIT` 市價: `MARKET`)
 * amount: 要交易的數位貨幣數量，大於0代表購買，小於0代表販賣
 * price: 以多少價格進行交易，若採用市價，此欄位請填入隨意值
@@ -228,7 +228,7 @@ Maximum length of string is 200 characters
 {'exchange': 'Bitfinex', 'pair': 'ETH-USDT', 'amount': 1.0, 'price': 182.39, 'type': 'MARKET'}
 ```
 
-# 存取策略參數
+## 存取策略參數
 使用 ```this.xxx``` 或是 ```this['OPTION_NAME']``` 存取策略參數
 
 # 更多範例
