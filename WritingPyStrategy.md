@@ -34,7 +34,8 @@ class Strategy():
 
         // seconds for broker to call trade()
         // do not set the frequency below 60 sec.
-        // 60 * 30 for 30 mins        self.period = 10 * 60
+        // 60 * 30 for 30 mins        
+		self.period = 10 * 60
         self.options = {}
 
         // other properties, your code
@@ -84,12 +85,110 @@ class Strategy():
 ```
 
 
+## 回傳值 (trade)
+在Crypto-Arsenal的策略中，要向交易所下訂單的方式採用系統呼叫`trade`的回傳值進行交易。
+``` python
+def trade(self, information):
+	[
+	  {
+		'exchange': string
+		'pair': string
+		'type': string
+		'amount': float
+		'price': float
+	  }
+	]
+```
+
+### 欄位說明
+* exchange: 此筆訂單要向哪個交易所進行交易
+* pair: 交易貨幣對
+* type: 此筆訂單採用何種交易方式 (限價: `LIMIT` 市價: `MARKET`)
+* amount: 要交易的數位貨幣數量，大於0代表購買，小於0代表販賣
+* price: 以多少價格進行交易，若採用市價，此欄位請填入隨意值
+
+### 範例
+#### 限價
+此訂單為欲向`Binance`交易所，以每單位`214.42`購買`1`個`ETH-USDT`的交易配對
+
+``` python
+[
+  {
+    'exchange': 'Binance',
+    'pair': 'ETH-USDT',
+    'type': 'LIMIT',
+    'amount': 1,
+    'price': 212.42
+  }
+]
+```
+
+#### 市價
+此訂單為欲向`Binance`交易所，以`市價`購買`1`個`ETH-USDT`的交易配對
+
+**雖然交易採用市價，price仍須存在，值為隨意數值**
+``` python
+[
+  {
+    'exchange': 'Binance',
+    'pair': 'ETH-USDT',
+    'type': 'MARKET',
+    'amount': 1,
+    'price': -1
+  }
+]
+```
+
+# Helper Functions
+## Log
+用來印出指定訊息
+``` python
+Log(str);
+```
+最大長度為 200 個字串
+### 範例
+印出收盤價、開盤價與資產
+``` python
+Log(information['candles'][exchange][pair][0]['close'])
+Log(information['candles'][exchange][pair][0]['open'])
+Log('assest' + str(self['assets'][exchange]))
+```
+## GetLastOrderSnapshot
+回傳最後一次成交訂單，包含市價單成交價格
+結構如下
+``` python
+{'exchange': 'Bitfinex', 'pair': 'ETH-USDT', 'amount': 1.0, 'price': 182.39, 'type': 'MARKET'}
+```
+### 範例
+取回最後一次成交訂單資訊，並印出成交價量資訊
+``` python
+last_order = GetLastOrderSnapshot()
+Log( 'last_amount: ' + str(self.get_last_order[2]) + 'last_price: ' + str(self.get_last_order[3]))
+```
+
+## 存取策略參數
+透過 ```self['OPTION_NAME']``` 存取策略參數
+### 範例
+取回所定義的R1數值
+``` python
+def trade(self, information):
+    R1 = float(self['R1']) 
+```
+
 
 
 ## 進階用法
-* 可使用 np 存取 [numpy](http://www.numpy.org/)
-* 可使用 talib 存取 [talib](https://github.com/mrjbq7/ta-lib)
-* 透過 ```self['OPTION_NAME']``` 存取策略參數
+可使用 np 存取 [numpy](http://www.numpy.org/)
+可使用 talib 存取 [talib](https://github.com/mrjbq7/ta-lib)
+### 範例
+使用np.append
+``` python
+self.close_price_trace = np.append(self.close_price_trace, [float( information['candles'][exchange][pair][0]['close'])])
+        ```
+使用talib計算RSI
+``` python
+rsi = talib.RSI(self.close_price_trace, Len)[-1]
+```
 
 
 ### 黃金交叉策略範例
@@ -111,15 +210,15 @@ class Strategy():
                 'pairs': ['ETH-USDT'],
             },
         }
-        self.period = 10 * 60
+        self.period = 10 * 60 //10分鐘線
         self.options = {}
 
         # user defined class attribute
         self.last_type = 'sell'
         self.last_cross_status = None
         self.close_price_trace = np.array([])
-        self.ma_long = 10
-        self.ma_short = 5
+        self.ma_long = 10  //定義10個週期，用以計算長均線
+        self.ma_short = 5  //定義5個週期，用以計算短均線
         self.UP = 1
         self.DOWN = 2
 
