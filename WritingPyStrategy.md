@@ -147,10 +147,11 @@ Log(str);
 ```
 最大長度為 200 個字串
 ### 範例
-印出收盤價、開盤價與資產
+印出收盤價、開盤價、交易量與資產
 ``` python
 Log(information['candles'][exchange][pair][0]['close'])
 Log(information['candles'][exchange][pair][0]['open'])
+Log(information['candles'][exchange][pair][0]['volume'])
 Log('assest' + str(self['assets'][exchange]))
 ```
 ## GetLastOrderSnapshot
