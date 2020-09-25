@@ -180,19 +180,19 @@ Log( 'last_amount: ' + str(self.get_last_order[2]) + 'last_price: ' + str(self.g
 ## 存取策略參數
 透過 ```self['OPTION_NAME']``` 存取策略參數
 ### 範例
-當使用者在自定義參數R1，使用以下方法可在程式內取回所定義的R1數值
-![](https://drive.google.com/file/d/16-bHa0jOZvPerOqEdIKRwDXlH50MHplr/view?usp=sharing)
+當使用者自定義參數R1，使用以下方法可在程式內取回所定義的R1數值
+![alt text](https://drive.google.com/file/d/16-bHa0jOZvPerOqEdIKRwDXlH50MHplr/view?usp=sharing)
 ``` python
 def trade(self, information):
     R1 = float(self['R1']) 
 ```
 
 ## 空單交易、手續費與滑價調整
-新增策略參數 is_shoting, exchange_fee, spread
+新增策略參數 is_shorting, exchange_fee, spread
 ### 範例
 使用者透過將is_shorting參數設定為true，可開啟空單交易模式
 另可調整exchange_fee以及spread，以設定更嚴格的回測條件
-![](https://drive.google.com/file/d/1IWJoekgYPgQWfxfLv_DZ3KjtTkuIeA4L/view?usp=sharing)
+![alt text](https://drive.google.com/file/d/1IWJoekgYPgQWfxfLv_DZ3KjtTkuIeA4L/view?usp=sharing)
 
 
 ## 進階用法
