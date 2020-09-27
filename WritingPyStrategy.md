@@ -165,7 +165,7 @@ Log('assest btc: ' + str(self['assets'][exchange]['BTC']))
 ```
 
 ## GetLastOrderSnapshot
-回傳最後一次成交訂單，包含市價單成交價格
+回傳最後一次成交訂單，包含市價單成交價格  
 結構如下
 ``` python
 {'exchange': 'Bitfinex', 'pair': 'ETH-USDT', 'amount': 1.0, 'price': 182.39, 'type': 'MARKET'}
@@ -190,13 +190,13 @@ def trade(self, information):
 ## 空單交易、手續費與滑價調整
 新增策略參數 is_shorting, exchange_fee, spread
 ### 範例
-使用者透過將is_shorting參數設定為true，可開啟空單交易模式
+使用者透過將is_shorting參數設定為true，可開啟空單交易模式  
 另可調整exchange_fee以及spread，以設定更嚴格的回測條件
 ![image](https://drive.google.com/uc?export=view&id=1IWJoekgYPgQWfxfLv_DZ3KjtTkuIeA4L)
 
 
 ## 進階用法
-可使用 np 存取 [numpy](http://www.numpy.org/)
+可使用 np 存取 [numpy](http://www.numpy.org/)  
 可使用 talib 存取 [talib](https://github.com/mrjbq7/ta-lib)
 ### 範例
 使用np.append，使用talib計算RSI
