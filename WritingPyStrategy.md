@@ -192,7 +192,7 @@ def trade(self, information):
 ### 範例
 使用者透過將is_shorting參數設定為true，可開啟空單交易模式  
 另可調整exchange_fee以及spread，以設定更嚴格的回測條件
-![image](https://drive.google.com/uc?export=view&id=1IWJoekgYPgQWfxfLv_DZ3KjtTkuIeA4L)
+![image2](https://drive.google.com/uc?export=view&id=1IWJoekgYPgQWfxfLv_DZ3KjtTkuIeA4L)
 
 
 ## 進階用法
