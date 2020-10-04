@@ -32,13 +32,12 @@ class Strategy():
             },
         }
 
-        // seconds for broker to call trade()
-        // do not set the frequency below 60 sec.
-        // 60 * 30 for 30 mins        
-		self.period = 10 * 60
+        # seconds for broker to call trade()
+        # do not set the frequency below 60 sec.
+        # 10 * 60 for 10 mins
+        self.period = 10 * 60
         self.options = {}
-
-        // other properties, your code
+        
         # user defined class attribute
         self.last_type = 'sell'
 
@@ -225,15 +224,15 @@ class Strategy():
                 'pairs': ['ETH-USDT'],
             },
         }
-        self.period = 10 * 60 //10分鐘線
+        self.period = 10 * 60 #10分鐘線
         self.options = {}
 
         # user defined class attribute
         self.last_type = 'sell'
         self.last_cross_status = None
         self.close_price_trace = np.array([])
-        self.ma_long = 10  //定義10個週期，用以計算長均線
-        self.ma_short = 5  //定義5個週期，用以計算短均線
+        self.ma_long = 10  #定義10個週期，用以計算長均線
+        self.ma_short = 5  #定義5個週期，用以計算短均線
         self.UP = 1
         self.DOWN = 2
 
