@@ -108,7 +108,7 @@ def trade(self, information):
 
 ### 範例
 #### 限價
-此訂單為欲向`Binance`交易所，以每單位`214.42`購買`1`個`ETH-USDT`的交易配對
+此訂單為欲向`Binance`交易所，以每單位`212.42`購買`1`個`ETH-USDT`的交易配對
 
 ``` python
 [
@@ -172,7 +172,7 @@ Log('assest btc: ' + str(self['assets'][exchange]['BTC']))
 ### 範例
 取回最後一次成交訂單資訊，並印出成交價量資訊
 ``` python
-last_order = GetLastOrderSnapshot()
+get_last_order = GetLastOrderSnapshot()
 Log( 'last_amount: ' + str(self.get_last_order[2]) + 'last_price: ' + str(self.get_last_order[3]))
 ```
 
@@ -192,6 +192,9 @@ def trade(self, information):
 使用者透過將is_shorting參數設定為true，可開啟空單交易模式  
 另可調整exchange_fee以及spread，以設定更嚴格的回測條件
 ![image2](https://drive.google.com/uc?export=view&id=1IWJoekgYPgQWfxfLv_DZ3KjtTkuIeA4L)
+上圖所示，exchange_fee設定為0.01，代表每一筆交易會加收總額1%費用
+（若沒有設定，預設是0.1%的手續費）
+spread代表滑點，0.05代表每筆交易價格會有5%差異
 
 
 ## 進階用法
