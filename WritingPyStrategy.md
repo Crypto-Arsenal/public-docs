@@ -9,10 +9,6 @@ Developing My Strategy in Python
 * 可以使用 Log(str) 紀錄運行資訊
 
 # 策略
-
-## 架構
-
-
 ``` python
 # Class name must be Strategy
 class Strategy():
@@ -72,16 +68,39 @@ class Strategy():
         return []
 
 ```
+## 架構
+### Candle
+系統呼叫strategy時，共會傳入一個參數並放次於第一個參數，此參數後續以information命名解釋． 傳入的資訊分為兩大項，其一為candle(K線圖資訊)，另一項為orderBooks(訂單狀態)． 上述兩項資訊將放置於一個object中，取用方法為:
+```python
+information['candles']
+information['orderBooks']
+```
 
-* information, 回傳所需結構, `__init__` 所需參數, 欄位請參考 [Nodejs](WritingStrategy.md)
-
-
+Candle會以array of object的形式傳入上次呼叫到此次呼叫的K線圖資訊，共含有五項資訊 open、close、high、low、volume，取用方式如下:
+```python
+information['candles'][exchange][pair][0]['open']
+information['candles'][exchange][pair][0]['close']
+information['candles'][exchange][pair][0]['high']
+information['candles'][exchange][pair][0]['low']
+information['candles'][exchange][pair][0]['volume']
+```
+### 交易所 Exchange
+策略使用者可於使用策略時決定使用的 exchange 交易所 (例如Bitfinex), 這時此設定會被忽略，以使用者執行策略時選擇為主,程式內請使用 information 取得當前使用的 exchange 進行交易
+```python
+exchange = list(information['candles'])[0] 
+```
+### 交易對 Pair
+Crypto-Arsenal支援單一Strategy同時註冊多組交易pair，因此candle與orderBooks會同時傳入多組pair的資訊，策略使用者可於使用策略時決定使用的pair(例如BTC-USDT), 這時程式內設定的pair會被忽略，以使用者執行策略時選擇為主,程式內請使用 information 取得當前使用的 pair進行交易
+```python
+pair = list(information['candles'][exchange])[0] 
+```
 ### Assets
 策略會擁有隨時更新的資產 (assets) 資訊，即當前可進行操作的貨幣，取用方式如下:
 ```python
   usdt_amount = self['assets'][exchange]['USDT'] 
   btc_amount = self['assets'][exchange]['BTC'] 
 ```
+
 
 
 ## 回傳值 (trade)
@@ -146,7 +165,7 @@ Log(str);
 ```
 最大長度為 200 個字串
 ### 範例
-印出收盤價、開盤價、交易量與資產
+印出收盤價、開盤價與交易量
 ``` python
 exchange = list(information['candles'])[0] //Bitfinex
 pair = list(information['candles'][exchange])[0] //BTC-USDT
@@ -154,10 +173,8 @@ Log(information['candles'][exchange][pair][0]['close'])
 Log(information['candles'][exchange][pair][0]['open'])
 Log(information['candles'][exchange][pair][0]['volume'])
 ```
-## Assets
-策略會擁有隨時更新的資產 (assets) 資訊，即當前可進行操作的貨幣，取用方式如下:
 ### 範例
-印出擁有的'USDT'和'BTC'
+印出擁有的資產'USDT'和'BTC'
 ``` python
 Log('assest usdt: ' + str(self['assets'][exchange]['USDT']))
 Log('assest btc: ' + str(self['assets'][exchange]['BTC']))
