@@ -173,7 +173,7 @@ Log('assest btc: ' + str(self['assets'][exchange]['BTC']))
 取回最後一次成交訂單資訊，並印出成交價量資訊
 ``` python
 get_last_order = GetLastOrderSnapshot()
-Log( 'last_amount: ' + str(self.get_last_order[2]) + 'last_price: ' + str(self.get_last_order[3]))
+Log( 'last_amount: ' + str(get_last_order[2]) + 'last_price: ' + str(get_last_order[3]))
 ```
 
 ## 存取策略參數
@@ -194,6 +194,7 @@ def trade(self, information):
 ![image2](https://drive.google.com/uc?export=view&id=1IWJoekgYPgQWfxfLv_DZ3KjtTkuIeA4L)
 上圖所示，exchange_fee設定為0.01，代表每一筆交易會加收總額1%費用
 （若沒有設定，預設是0.1%的手續費）
+
 spread代表滑點，0.05代表每筆交易價格會有5%差異
 
 
