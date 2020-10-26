@@ -101,6 +101,28 @@ pair = list(information['candles'][exchange])[0]
   btc_amount = self['assets'][exchange]['BTC'] 
 ```
 
+### Order Books
+Order Books是在實際交易時才會使用，在回測和競技場比賽都用不到．
+在執行Backtest模式中，不會傳入Order books資訊．
+orderBooks會以object of array of object的形式傳入，將傳入目前交易所中此pair的訂單資訊，分成兩大項asks與bids，兩項中皆有相同的三項資料格式price、count、amount，取用方式如下: 
+```python
+  orderBooks = information['orderBooks']
+  oneOrderBook = orderBooks[exchange][pair]
+
+  askOrderBook = oneOrderBook.asks
+  for askOrder in askOrderBook: 
+      price = askOrder.price
+      count = askOrder.count
+      amount = askOrder.amount
+  
+
+  bidOrderBook = oneOrderBook.bids
+  for bidOrder in bidOrderBook: 
+      price = bidOrder.price
+      count = bidOrder.count
+      amount = bidOrder.amount
+    
+```
 
 
 ## 回傳值 (trade)
