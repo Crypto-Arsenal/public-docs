@@ -97,8 +97,12 @@ pair = list(information['candles'][exchange])[0]
 ### Assets
 策略會擁有隨時更新的資產 (assets) 資訊，即當前可進行操作的貨幣，取用方式如下:
 ```python
-  usdt_amount = self['assets'][exchange]['USDT'] 
-  btc_amount = self['assets'][exchange]['BTC'] 
+  pair = list(information['candles'][exchange])[0] #BTC-USDT
+  targetCurrency = pair.split('-')[0]  #BTC
+  baseCurrency = pair.split('-')[1]  #USDT
+  
+  baseCurrency_amount = self['assets'][exchange][baseCurrency] 
+  targetCurrency_amount = self['assets'][exchange][targetCurrency] 
 ```
 
 ### Order Books
