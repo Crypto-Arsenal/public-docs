@@ -216,7 +216,7 @@ Log('assest btc: ' + str(self['assets'][exchange]['BTC']))
 取回最後一次成交訂單資訊，並印出成交價量資訊
 ``` python
 get_last_order = GetLastOrderSnapshot()
-Log( 'last_amount: ' + str(get_last_order[2]) + 'last_price: ' + str(get_last_order[3]))
+Log( 'last_amount: ' + str(get_last_order['amount']) + 'last_price: ' + str(get_last_order['price']))
 ```
 
 ## 存取策略參數
