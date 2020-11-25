@@ -332,7 +332,7 @@ class Strategy():
                 }
             ]
         # cross down
-        elif amount = self['assets'][exchange]['ETH'] >0  and self.last_type == 'buy' and cur_cross == self.DOWN and self.last_cross_status == self.UP:
+        elif self['assets'][exchange]['ETH'] >0  and self.last_type == 'buy' and cur_cross == self.DOWN and self.last_cross_status == self.UP:
             Log('selling, ' + exchange + ':' + pair)
             self.last_type = 'sell'
             self.last_cross_status = cur_cross
