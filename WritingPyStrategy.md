@@ -296,10 +296,10 @@ class Strategy():
 
     # called every self.period
     def trade(self, information):
-
         exchange = list(information['candles'])[0]
         pair = list(information['candles'][exchange])[0]
         close_price = information['candles'][exchange][pair][0]['close']
+        target_amount = self['assets'][exchange][pair.split('-')[0]] 
 
         # add latest price into trace
         self.close_price_trace = np.append(self.close_price_trace, [float(close_price)])
@@ -308,7 +308,7 @@ class Strategy():
         # calculate current ma cross status
         cur_cross = self.get_current_ma_cross()
 
-        Log('info: ' + str(information['candles'][exchange][pair][0]['time']) + ', ' + str(information['candles'][exchange][pair][0]['open']) + ', assets' + str(self['assets'][exchange]['ETH']))
+        Log('info: ' + str(information['candles'][exchange][pair][0]['time']) + ', ' + str(information['candles'][exchange][pair][0]['open']) + ', assets' + str(target_amount))
 
         if cur_cross is None:
             return []
@@ -332,7 +332,7 @@ class Strategy():
                 }
             ]
         # cross down
-        elif self['assets'][exchange]['ETH'] >0  and self.last_type == 'buy' and cur_cross == self.DOWN and self.last_cross_status == self.UP:
+        elif target_amount>0  and self.last_type == 'buy' and cur_cross == self.DOWN and self.last_cross_status == self.UP:
             Log('selling, ' + exchange + ':' + pair)
             self.last_type = 'sell'
             self.last_cross_status = cur_cross
