@@ -112,19 +112,18 @@ orderBooks會以object of array of object的形式傳入，將傳入目前交易
 ```python
   orderBooks = information['orderBooks']
   oneOrderBook = orderBooks[exchange][pair]
+  orderBooks = information['orderBooks']
+  oneOrderBook = orderBooks[exchange][pair]
 
-  askOrderBook = oneOrderBook.asks
-  for askOrder in askOrderBook: 
-      price = askOrder.price
-      count = askOrder.count
-      amount = askOrder.amount
-  
+  askOrderBook = oneOrderBook['asks']
+  last_ask_price = askOrderBook[-1]['price']
+  last_ask_count = askOrderBook[-1]['count']
+  last_ask_amount = askOrderBook[-1]['amount']
 
-  bidOrderBook = oneOrderBook.bids
-  for bidOrder in bidOrderBook: 
-      price = bidOrder.price
-      count = bidOrder.count
-      amount = bidOrder.amount
+  bidOrderBook = oneOrderBook['bids']
+  last_bid_price = bidOrderBook[-1]['price']
+  last_bid_count = bidOrderBook[-1]['count']
+  last_bid_amount = bidOrderBook[-1]['amount']
     
 ```
 
@@ -205,19 +204,35 @@ Log(information['candles'][exchange][pair][0]['volume'])
 Log('assest usdt: ' + str(self['assets'][exchange]['USDT']))
 Log('assest btc: ' + str(self['assets'][exchange]['BTC']))
 ```
-
-## GetLastOrderSnapshot
+## on_order_state_change()
 回傳最後一次成交訂單，包含市價單成交價格  
 結構如下
 ``` python
 {'exchange': 'Bitfinex', 'pair': 'ETH-USDT', 'amount': 1.0, 'price': 182.39, 'type': 'MARKET'}
 ```
 ### 範例
-取回最後一次成交訂單資訊，並印出成交價量資訊
+取回最後一次成交訂單資訊，並印出成交價資訊
+需define一個函數on_order_state_change，平台會依照使用者定義之週期呼叫此函數，並印出相關資訊。
 ``` python
-get_last_order = GetLastOrderSnapshot()
-Log( 'last_amount: ' + str(get_last_order['amount']) + 'last_price: ' + str(get_last_order['price']))
+    def on_order_state_change(self,  order):
+        Log("on order state change")
+        Log("order: " + str(order))
+        Log("order price: " + str(order["price"]))
 ```
+
+## GetLastOrderSnapshot
+回傳最後一次的訂單資訊(不管是否成交)，結構如下
+``` python
+{'exchange': 'Bitfinex', 'pair': 'ETH-USDT', 'amount': 1.0, 'price': 182.39, 'type': 'MARKET'}
+```
+### 範例
+取回最後一次掛單紀錄，並印出價量資訊。與on_order_state_change不同，GetLastOrderSnapshot函數是在trade函數當中呼叫。
+``` python
+snap = GetLastOrderSnapshot()
+if snap != {}:
+    Log( 'snap_amount: ' + str(snap['amount']) + ' ,snap_price: ' + str(snap['price']))
+```
+
 
 ## 存取策略參數
 透過 ```self['OPTION_NAME']``` 存取策略參數
