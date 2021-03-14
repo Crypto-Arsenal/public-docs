@@ -205,19 +205,16 @@ Log('assest usdt: ' + str(self['assets'][exchange]['USDT']))
 Log('assest btc: ' + str(self['assets'][exchange]['BTC']))
 ```
 ## on_order_state_change()
-回傳最後一次成交訂單，包含市價單成交價格  
-結構如下
+回傳每一筆訂單紀錄，結構如下
 ``` python
-{'exchange': 'Bitfinex', 'pair': 'ETH-USDT', 'amount': 1.0, 'price': 182.39, 'type': 'MARKET'}
+{'exchange': 'Bitfinex', 'pair': 'ETH-USDT', 'amount': 1.0, 'amountFilled': 1.0, 'price': 1849.7, 'type': 'MARKET', 'status': 'FILLED'} 
 ```
 ### 範例
-取回最後一次成交訂單資訊，並印出成交價資訊
+取回訂單資訊，並印出成交價資訊
 需define一個函數on_order_state_change，平台會依照使用者定義之週期呼叫此函數，並印出相關資訊。
 ``` python
     def on_order_state_change(self,  order):
-        Log("on order state change")
-        Log("order: " + str(order))
-        Log("order price: " + str(order["price"]))
+        Log("on order state change message: " + str(order) + " order price: " + str(order["price"]))
 ```
 
 ## GetLastOrderSnapshot
