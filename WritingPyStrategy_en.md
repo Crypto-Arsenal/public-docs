@@ -62,6 +62,9 @@ class Strategy():
                 },
             ]
         return []
+       
+    def on_order_state_change(self, order):
+        Log("on order state change message: " + str(order) + " order price: " + str(order["price"]))
 
 ```
 
