@@ -38,7 +38,7 @@ class Strategy():
         # user defined class attribute
         self.last_type = 'sell'
 
-
+	
     # called every self.period
     def trade(self, information):
         # for single pair strategy, user can choose which exchange/pair to use when launch, get current exchange/pair from information
@@ -67,6 +67,10 @@ class Strategy():
                 },
             ]
         return []
+	
+
+    def on_order_state_change(self, order):
+        Log("on order state change message: " + str(order) + " order price: " + str(order["price"]))
 
 ```
 
