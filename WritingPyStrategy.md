@@ -85,7 +85,7 @@ information['candles']
 information['orderBooks']
 ```
 
-Candle 會以 array of object 的形式傳入上次呼叫到此次呼叫的 K 線圖資訊，共含有五項資訊 open、close、high、low、volume，取用方式如下:
+Candle 會以 array of object 的形式傳入上次呼叫到此次呼叫的 K 線圖資訊，共含有6項資訊 open、close、high、low、volume和time，取用方式如下:
 
 ```python
 information['candles'][exchange][pair][0]['open']
@@ -93,6 +93,7 @@ information['candles'][exchange][pair][0]['close']
 information['candles'][exchange][pair][0]['high']
 information['candles'][exchange][pair][0]['low']
 information['candles'][exchange][pair][0]['volume']
+information['candles'][exchange][pair][0]['time']
 ```
 
 ### 交易所 Exchange
