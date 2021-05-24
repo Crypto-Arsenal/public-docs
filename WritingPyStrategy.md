@@ -78,10 +78,11 @@ class Strategy():
 
 ### Candle
 
-系統呼叫 strategy 時，共會傳入一個參數並放次於第一個參數，此參數後續以 information 命名解釋． 傳入的資訊分為兩大項，其一為 candle(K 線圖資訊)，另一項為 orderBooks(訂單狀態)． 上述兩項資訊將放置於一個 object 中，取用方法為:
+系統呼叫 strategy 時，共會傳入一個參數並放次於第一個參數，此參數後續以 information 命名解釋． 傳入的資訊分為3大類，分別為 candles(K線圖資訊)， orders(訂單），以及 orderBooks(訂單簿)． 上述資訊皆放置於information物件中，取用方法為:
 
 ```python
 information['candles']
+information['orders']
 information['orderBooks']
 ```
 
@@ -125,27 +126,40 @@ pair = list(information['candles'][exchange])[0]
   target_currency_amount = self['assets'][exchange][target_currency]
 ```
 
+### Orders
+
+使用information['orders']取得訂單資訊，以 object of array of object 的形式儲存，第一筆訂單為information['orders'][0]，訂單內的資料包含 price, amount, status和orderId.
+其中status可能為FILLED或NEW，分別代表成交或尚未成交．
+取用範例如下:
+
+```python
+  for i in range(len(information['orders'])):
+    Log('order price: ' + str(information['orders'][i]['price']) +' ,order amount: ' + str(information['orders'][i]['amount'])  + ' ,status: ' + str(information['orders'][i]['status']) + ' ,orderId: ' + str(information['orders'][i]['orderId']))   
+
+```
+刪除訂單的範例如下:
+```python
+CancelOrder(information['orders'][0])
+```
 ### Order Books
 
 Order Books 是在實際交易時才會使用，在回測和競技場比賽都用不到．
 在執行 Backtest 模式中，不會傳入 Order books 資訊．
-orderBooks 會以 object of array of object 的形式傳入，將傳入目前交易所中此 pair 的訂單資訊，分成兩大項 asks 與 bids，兩項中皆有相同的三項資料格式 price、count、amount，取用方式如下:
+orderBooks 會以 object of array of object 的形式傳入，將傳入目前交易所中此 pair 的訂單資訊，分成兩大類 asks 與 bids，兩類中皆有相同的三項資料格式 price、count、amount，取用方式如下:
 
 ```python
-  orderBooks = information['orderBooks']
-  oneOrderBook = orderBooks[exchange][pair]
-  orderBooks = information['orderBooks']
-  oneOrderBook = orderBooks[exchange][pair]
+  order_books = information['orderBooks']
+  one_order_book = order_books[exchange][pair]
 
-  askOrderBook = oneOrderBook['asks']
-  last_ask_price = askOrderBook[-1]['price']
-  last_ask_count = askOrderBook[-1]['count']
-  last_ask_amount = askOrderBook[-1]['amount']
+  ask_order_book = one_order_book['asks']
+  last_ask_price = ask_order_book[-1]['price']
+  last_ask_count = ask_order_book[-1]['count']
+  last_ask_amount = ask_order_book[-1]['amount']
 
-  bidOrderBook = oneOrderBook['bids']
-  last_bid_price = bidOrderBook[-1]['price']
-  last_bid_count = bidOrderBook[-1]['count']
-  last_bid_amount = bidOrderBook[-1]['amount']
+  bid_order_book = one_order_book['bids']
+  last_bid_price = bid_order_book[-1]['price']
+  last_bid_count = bid_order_book[-1]['count']
+  last_bid_amount = bid_order_book[-1]['amount']
 
 ```
 
@@ -263,7 +277,7 @@ Log('assest btc: ' + str(self['assets'][exchange]['BTC']))
 
 ## GetLastOrderSnapshot
 
-回傳最後一次的訂單資訊(不管是否成交)，結構如下
+回傳最後一次成交的訂單資訊，結構如下
 
 ```python
 {'exchange': 'Bitfinex', 'pair': 'ETH-USDT', 'amount': 1.0, 'price': 182.39, 'type': 'MARKET'}
