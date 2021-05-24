@@ -134,12 +134,15 @@ pair = list(information['candles'][exchange])[0]
 
 ```python
   for i in range(len(information['orders'])):
-    Log('order price: ' + str(information['orders'][i]['price']) +' ,order amount: ' + str(information['orders'][i]['amount'])  + ' ,status: ' + str(information['orders'][i]['status']) + ' ,orderId: ' + str(information['orders'][i]['orderId']))   
+    Log('order price: ' + str(information['orders'][i]['price']) +
+    ' ,order amount: ' + str(information['orders'][i]['amount']) + 
+    ' ,status: ' + str(information['orders'][i]['status']) + 
+    ' ,orderId: ' + str(information['orders'][i]['orderId']))   
 
 ```
 刪除訂單的範例如下:
 ```python
-CancelOrder(information['orders'][0])
+  CancelOrder(information['orders'][0])
 ```
 ### Order Books
 
